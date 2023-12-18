@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="specialty"
+            type="com.ezshifa.aihealthcare.models.consultandappointmodels.Speciality" />
+    </data>
+
+    <LinearLayout
+
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/specialtyIcon"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            app:tint="@color/blue_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{specialty.title}"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:id="@+id/specialtyName"
+            android:textColor="@color/black"
+            />
+        <!--android:textColor="@{specialty.isSelected?@android:color/white:@android:color/black}"-->
+    </LinearLayout>
+</layout>

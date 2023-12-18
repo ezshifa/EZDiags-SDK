@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/container"
+    android:background="@drawable/payment_type_style"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="5dp">
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/jazz_cash"
+        android:id="@+id/paymentIcon"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/paymentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toEndOf="@+id/paymentIcon"
+        android:fontFamily="@font/inter_regular"
+        android:gravity="center"
+        android:text="Mobile Account"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"/>
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<resources>
+    <string name="ez">EZ</string>
+    <string name="vitals">Diags</string>
+    <string name="app_name">EZDiags</string>
+    <string name="ai_based_predictive">AI BASED PREDICTIVE</string>
+    <string name="healthcare_platform">HEALTHCARE PLATFORM</string>
+    <string name="view_graph">View \ngraph</string>
+    <string name="oxygen">Oxygen</string>
+    <string name="wellness">Wellness</string>
+    <string name="healhscore">Your Health Score</string>
+    <string name="view_range_chart">View range chart</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="done">Done</string>
+    <string name="server_error">Server error, Please try again</string>
+    <string name="system_is_scanning">System is Scanning</string>
+    <string name="please_wait_for_results">Please wait for results</string>
+    <string name="temperature">Temperature</string>
+    <string name="normal_96_98">Normal 96–98%</string>
+    <string name="normal_97_98_u2109">Normal 97–98℉</string>
+    <string name="normal_125_90_mmhg">Normal 125/90 mmHg</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="normal_60_100">Normal 60–100</string>
+    <string name="sugar">Sugar</string>
+    <string name="normal_110_140">Normal 110–140</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="cancel">Cancel</string>
+    <string name="connect_to_internet">Please connect to Internet and try again.</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="default_error_message">Server is not responding, Please try again later</string>
+    <string name="hold_still_for_15secs">Please hold still for 15secs for better result</string>
+    <string name="relax">Relax</string>
+    <string name="calm">Calm</string>
+    <string name="anxious">Anxious</string>
+    <string name="stressed">Stressed</string>
+    <string name="working_on_video_please_wait">Working on video, Please wait..</string>
+    <string name="video_capturing_error_please_try_again">Video capturing error, Please try again.</string>
+    <string name="file_creation_failed">File creation failed</string>
+    <string name="video_uploaded_successfully">Video uploaded successfully</string>
+    <string name="vital_fetched_unsuccessful_please_try_again">Vital fetched unsuccessful, Please try again</string>
+    <string name="permissions_required">Permissions Required</string>
+    <string name="please_allow_all_the_permissions_to_continue">Please allow all the permissions to continue..</string>
+    <string name="range_chart">Range Chart</string>
+
+</resources>

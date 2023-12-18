@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="docFacility"
+            type="com.ezshifa.aihealthcare.models.consultandappointmodels.DoctorFacility" />
+
+        <variable
+            name="facilitySlots"
+            type="com.ezshifa.aihealthcare.models.consultandappointmodels.DocFacilitySlot" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/videoConsultationPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/callBtn"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_regular"
+                android:maxLines="2"
+                android:text="@string/video_consultation"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/callBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/green_btn"
+                android:drawableLeft="@drawable/ic_video_call"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/call_now"
+                android:visibility="gone"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/noTimeSlotMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/no_time_slots_available"
+            android:gravity="center"
+            android:fontFamily="@font/inter_regular"
+            android:visibility="@{facilitySlots.finalTimeSlots.size()>0 ? View.GONE : View.VISIBLE}"
+            android:textSize="@dimen/_11sdp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/previousTimeSlotIcon"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_left_arrow"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/timeSlots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_toLeftOf="@+id/nextTimeSlotIcon"
+                android:layout_toRightOf="@+id/previousTimeSlotIcon"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+            <ImageView
+                android:id="@+id/nextTimeSlotIcon"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_right_arrow"
+                android:visibility="@{facilitySlots.finalTimeSlots.size()>0 ? View.VISIBLE : View.GONE}" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/videoConsultationDoctorDetailLayout"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/videoConsultationDocFeeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|left"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical|left"
+                android:text="@{String.format(@string/consulting_fee,docFacility.DoctorFacilityAssociation.fee)}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtTimeSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold"
+                android:layout_marginRight="7dp" />
+
+            <TextView
+                android:id="@+id/txtDescSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="If you are Ok with selected date and time, please click here to confirm"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold"
+                android:layout_marginRight="7dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/videoConsultationBookNow"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_toRightOf="@+id/videoConsultationDocFeeText"
+                android:background="@drawable/ic_book_btn_bg"
+                android:backgroundTint="@color/green_icon"
+                android:gravity="center"
+                android:text="Book Now"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="visible" />
+
+            <!-- android:visibility="@{facilitySlots.finalTimeSlots.size()>0 ? View.VISIBLE : View.GONE}"-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

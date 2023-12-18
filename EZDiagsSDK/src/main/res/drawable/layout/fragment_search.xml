@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="specialtyResponse"
+            type="com.ezshifa.aihealthcare.viewmodels.SpecialityViewModel" />
+
+        <variable
+            name="diseaseResponse"
+            type="com.ezshifa.aihealthcare.viewmodels.DiseaseViewModel" />
+
+        <variable
+            name="search"
+            type="com.ezshifa.aihealthcare.viewmodels.SearchViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.SearchFragment">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            app:tint="@color/blue_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="@{search.showBackArrow? View.VISIBLE : View.GONE}"
+            android:padding="5dp"
+            android:src="@drawable/ic_back" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:id="@+id/userLocation"
+            android:drawablePadding="5dp"
+            android:padding="5dp"
+            android:text="Rawalpindi"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/search_view_layout"
+            app:drawableLeftCompat="@drawable/small_location"
+            app:drawableRightCompat="@drawable/ic_expand" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/sortSearchResult"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/find_doctor_label"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/_10sdp"
+            android:maxLines="1"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/searchView"
+            android:background="@drawable/search_view_layout"
+            android:layout_marginTop="10dp"
+            android:hint="@string/search_hint_app"
+            android:drawableRight="@drawable/ic_search"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoComplete">
+            <requestFocus></requestFocus>
+        </AutoCompleteTextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/recentSearchLayout"
+            android:layout_marginTop="5dp"
+            android:visibility="@{search.hasRecentSearchResult ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/recent_search_label"
+                android:textColor="@color/dark_blue_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recentSearch"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:id="@+id/searchResultLayout"
+            android:padding="5dp"
+            android:background="@color/light_grey_color"
+            android:visibility="@{search.performSearch? View.VISIBLE : View.GONE}">
+
+            <LinearLayout
+                android:id="@+id/filterContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/searchedQuery"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.3"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@{search.searchedQuery}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:visibility="@{search.hasSearchResult? View.VISIBLE : View.GONE}" />
+
+                <Spinner
+                    android:layout_gravity="center"
+                    android:id="@+id/sortSearchResult"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:entries="@array/doc_filer"
+                    android:visibility="@{search.hasSearchResult? View.VISIBLE : View.GONE}"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foundedSearchListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/filterContainer"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="@{search.hasSearchResult? View.VISIBLE : View.GONE}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/notFoundMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:text="@{search.errorMsg ,default=@string/search_not_found_msg}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="@{search.hasSearchResult? View.GONE : View.VISIBLE}" />
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/diseaseMsg"
+            android:layout_marginTop="10dp"
+            android:visibility="@{diseaseResponse.hasDiseases || !diseaseResponse.hasApiResponse ? View.GONE : View.VISIBLE, default=gone}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/diseaseErrorMsg"
+                android:text="@{diseaseResponse.diseasesErrorMsg, default=@string/disease_not_found}"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/try_again"
+                android:id="@+id/diseaseTryAgain"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/blue_button"
+                android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+                android:textSize="14sp"
+                android:visibility="@{diseaseResponse.hasDiseases? View.GONE : View.VISIBLE, default=gone}"
+                android:onClick="@{diseaseResponse::reloadDisease}"/>
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="@{diseaseResponse.hasDiseases &amp;&amp; !search.performSearch? View.VISIBLE : View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/famousDiseaseLayout"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="@{search.performSearch? View.GONE : View.VISIBLE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/viewSpecialtyAll"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/most_search_disease_label"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/viewSpecialtyAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/view_all"
+                android:textColor="@color/blue_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+ />
+            <!--android:visibility="@{specialtyResponse.hasSpeciality ? View.VISIBLE : View.GONE}"-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_marginTop="10dp"
+            android:id="@+id/specialtyListLayout"
+            android:visibility="@{specialtyResponse.hasSpeciality &amp;&amp; !search.performSearch ? View.VISIBLE : View.GONE}">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:id="@+id/previousSpecialtyPage"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_previous_arrow"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:onClick="@{specialtyResponse::loadPreviousPage}"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/specialtyList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_toStartOf="@+id/nextSpecialtyPage"
+                android:layout_toEndOf="@+id/previousSpecialtyPage"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_weight="8.6" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:id="@+id/nextSpecialtyPage"
+                android:src="@drawable/ic_next_arrow"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="@{specialtyResponse::loadNextPage}"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/specialtyErrorMsgLayout"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="@{specialtyResponse.hasSpeciality || !specialtyResponse.hasApiResponse ? View.GONE : View.VISIBLE, default=gone}">
+            <TextView
+                android:id="@+id/errorMsgSpecialty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{specialtyResponse.errorMsg, default=@string/no_specialty}"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+
+                android:visibility="@{specialtyResponse.hasSpeciality ? View.GONE : View.VISIBLE, default=gone}"
+                android:layout_gravity="center"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/try_again"
+                android:id="@+id/specialtyTryAgain"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/blue_button"
+                android:textColor="@android:color/white"
+                android:visibility="@{specialtyResponse.hasSpeciality? View.GONE : View.VISIBLE, default=gone}"
+                android:layout_margin="5dp"
+                android:onClick="@{specialtyResponse::reload}"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</layout>

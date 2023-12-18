@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/payment_type_style"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/walkinAppointmentType"
+        android:text="Walk-In Appointment"
+        android:clickable="true"
+        android:focusable="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/payment_type_style"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/onlineAppointmentType"
+        android:text="Online Appointment"
+        android:textSize="14sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+</merge>

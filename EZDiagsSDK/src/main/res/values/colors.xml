@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#2695d2</color>
+    <color name="topbar">#D8E9F9</color>
+    <color name="teal_200">#7b287d</color>
+    <color name="teal_700">#7b287d</color>
+    <color name="black">#FF000000</color>
+    <color name="light_gray">#6F6868</color>
+    <color name="light_gray_ed">#BAB9B9</color>
+    <color name="light_gray2">#CCCCCC</color>
+    <color name="light_gray1">#E9E9E9</color>
+    <color name="transparent">#4B879595</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple">#7b287d</color>
+    <color name="gray">#696969</color>
+    <color name="blue">#36b1eb</color>
+    <color name="blue2">#00C1DA</color>
+    <color name="blue1">#7C85D9FF</color>
+    <color name="red">#F44336</color>
+
+    <color name="green_icon">#97288F</color>
+    <color name="app_base_color">#97288F</color>
+    <color name="GRAY">#bdbec0</color>
+    <color name="dark_blue_color">#004AAD</color>
+    <color name="disable_color">#ACACAC</color>
+    <color name="red_color">#FF1616</color>
+
+    <color name="home_bg">#f9f9f9</color>
+    <color name="colorPrimary">#fafafa</color>
+
+    <color name="yellow_color">#F9BB26</color>
+    <color name="purple_color">#97288F</color>
+    <color name="dark2_blue_color">#013985</color>
+    <color name="green_color">#139E1C</color>
+    <color name="dark_green_color">#0E7515</color>
+    <color name="blue_color">#0B8ED8</color>
+    <color name="light_red">#FA5B5B</color>
+
+    <color name="light_grey_color">#ECECEC</color>
+    <color name="gray123">#BCBCBC</color>
+    <color name="gray1234">#9A9A9A</color>
+    <color name="grey_color">#4C4C4C</color>
+    <color name="dar_grey_color">#2B2B2B</color>
+
+    <color name="payment_card_color">#fafafa</color>
+    <color name="payment_card_stroke_color">#ececec</color>
+
+    <color name="payment_card_selection_color">#f7e18b</color>
+    <color name="payment_card_selection_stroke_color">#aa7e7d</color>
+
+    <color name="green">#009688</color>
+    <color name="app_very_light_grey">#f2f3f4</color>
+    <color name="app_medium_light_grey">#E6E5E5</color>
+    <color name="app_light_grey">#bdbec0</color>
+    <color name="BLACK">#000000</color>
+
+
+</resources>

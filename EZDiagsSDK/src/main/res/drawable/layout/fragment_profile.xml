@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ProfileFragment">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="0.0">
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:id="@+id/clTop"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:visibility="gone"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent">
+
+                   <ImageView
+                       android:id="@+id/logo"
+                       android:layout_width="wrap_content"
+                       android:layout_height="150dp"
+                       android:layout_marginTop="24dp"
+                       android:src="@drawable/screen_logo"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+
+                   <TextView
+                       android:id="@+id/tv2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/inter_semibold"
+                       android:text="@string/ez"
+                       android:textColor="@color/blue"
+                       android:textSize="28dp"
+                       app:layout_constraintEnd_toStartOf="@+id/tv3"
+                       app:layout_constraintHorizontal_bias="0.51"
+                       app:layout_constraintHorizontal_chainStyle="packed"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+                   <TextView
+                       android:id="@+id/tv3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/inter_semibold"
+                       android:text="@string/vitals"
+                       android:textColor="@color/purple"
+                       android:textSize="28dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toEndOf="@+id/tv2"
+                       app:layout_constraintTop_toTopOf="@+id/tv2" />
+
+
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:id="@+id/clSignUp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:visibility="visible"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/clTop">
+
+                   <TextView
+                       android:id="@+id/tvSignUp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/interextrabold"
+                       android:text="Update Profile"
+                       android:textColor="@color/black"
+                       android:textSize="22dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+
+
+                   <EditText
+                       android:id="@+id/edfname"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="16dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       android:drawableRight="@drawable/ic_required"
+                       android:hint="   First Name"
+                       android:inputType="textPersonName"
+                       android:paddingLeft="40dp"
+                       android:paddingRight="10dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/tvSignUp" />
+
+                   <EditText
+                       android:id="@+id/edlastname"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       android:drawableRight="@drawable/ic_required"
+                       android:hint="   Last Name"
+                       android:inputType="textPersonName"
+                       android:paddingLeft="40dp"
+                       android:paddingRight="10dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/edfname" />
+
+                   <EditText
+                       android:id="@+id/edphone"
+                       android:layout_width="0dp"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       android:drawableRight="@drawable/ic_required"
+                       android:hint="   Phone number"
+                       android:inputType="number"
+                       android:paddingLeft="40dp"
+                       android:paddingRight="10dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/edlastname" />
+
+
+                   <!--                   <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                       android:id="@+id/phoneLayout"-->
+<!--                       android:layout_width="match_parent"-->
+<!--                       android:layout_height="55dp"-->
+<!--                       android:layout_marginStart="24dp"-->
+<!--                       android:layout_marginTop="8dp"-->
+<!--                       android:layout_marginEnd="24dp"-->
+<!--                       android:background="@drawable/white_gradient"-->
+<!--                       app:layout_constraintEnd_toEndOf="parent"-->
+<!--                       app:layout_constraintStart_toStartOf="parent"-->
+<!--                       app:layout_constraintTop_toBottomOf="@+id/edlastname">-->
+
+<!--                       <com.hbb20.CountryCodePicker-->
+<!--                           android:id="@+id/ccp"-->
+<!--                           android:layout_width="wrap_content"-->
+<!--                           android:layout_height="wrap_content"-->
+<!--                           android:layout_centerVertical="true"-->
+<!--                           android:layout_marginStart="8dp"-->
+<!--                           app:ccp_autoDetectCountry="true"-->
+<!--                           app:ccp_contentColor="@color/black"-->
+<!--                           app:ccp_countryPreference="pk,us,gb"-->
+<!--                           app:ccp_defaultPhoneCode="92"-->
+<!--                           app:ccp_showNameCode="false"-->
+<!--                           app:ccp_textSize="16dp"-->
+<!--                           app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                           app:layout_constraintStart_toStartOf="parent"-->
+<!--                           app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                       <EditText-->
+<!--                           android:id="@+id/edphone"-->
+<!--                           android:layout_width="0dp"-->
+<!--                           android:layout_height="match_parent"-->
+<!--                           android:layout_marginStart="8dp"-->
+<!--                           android:background="@android:color/transparent"-->
+<!--                           android:drawableRight="@drawable/ic_required"-->
+<!--                           android:hint="@string/enter_your_phone_number"-->
+<!--                           android:inputType="number"-->
+<!--                           android:paddingRight="10dp"-->
+<!--                           android:visibility="visible"-->
+<!--                           android:maxLength="11"-->
+<!--                           android:textColor="@color/black"-->
+<!--                           android:textColorHint="@color/light_gray_ed"-->
+<!--                           app:layout_constraintEnd_toEndOf="parent"-->
+<!--                           app:layout_constraintStart_toEndOf="@+id/ccp"-->
+<!--                           app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                   </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+                   <EditText
+                       android:id="@+id/edEmailAddress"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       android:drawableRight="@drawable/ic_required"
+                       android:hint="   Email Adress"
+                       android:inputType="textEmailAddress"
+                       android:paddingLeft="40dp"
+                       android:paddingRight="10dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/edphone" />
+
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/clGender"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="24dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/edEmailAddress">
+
+                       <androidx.constraintlayout.widget.ConstraintLayout
+                           android:id="@+id/btnMale"
+                           android:layout_width="0dp"
+                           android:layout_height="85dp"
+                           android:layout_marginTop="8dp"
+                           android:layout_marginEnd="8dp"
+                           android:background="@drawable/gender_white_bg"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toStartOf="@+id/btnFemale"
+                           app:layout_constraintHorizontal_bias="0.5"
+                           app:layout_constraintHorizontal_chainStyle="packed"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent">
+
+                           <ImageView
+                               android:id="@+id/ivMale"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_marginStart="8dp"
+                               android:src="@drawable/male_purple"
+                               app:layout_constraintBottom_toBottomOf="parent"
+                               app:layout_constraintEnd_toStartOf="@+id/tvMale"
+                               app:layout_constraintHorizontal_bias="0.0"
+                               app:layout_constraintHorizontal_chainStyle="packed"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toTopOf="parent" />
+
+                           <TextView
+                               android:id="@+id/tvMale"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_marginEnd="8dp"
+                               android:fontFamily="@font/inter_regular"
+                               android:text="Male"
+                               android:textColor="@color/purple"
+                               android:textSize="12dp"
+                               android:lines="1"
+                               android:maxLines="1"
+                               app:layout_constraintBottom_toBottomOf="@+id/ivMale"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toEndOf="@+id/ivMale"
+                               app:layout_constraintTop_toTopOf="@+id/ivMale" />
+
+                       </androidx.constraintlayout.widget.ConstraintLayout>
+
+                       <androidx.constraintlayout.widget.ConstraintLayout
+                           android:id="@+id/btnFemale"
+                           android:layout_width="0dp"
+                           android:layout_height="85dp"
+                           android:layout_marginEnd="8dp"
+                           android:background="@drawable/gender_white_bg"
+                           app:layout_constraintEnd_toStartOf="@+id/btnOther"
+                           app:layout_constraintHorizontal_bias="0.5"
+                           app:layout_constraintStart_toEndOf="@+id/btnMale"
+                           app:layout_constraintTop_toTopOf="@+id/btnMale">
+
+                           <ImageView
+                               android:id="@+id/ivFemale"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_marginStart="8dp"
+                               android:src="@drawable/female_purple"
+                               app:layout_constraintBottom_toBottomOf="parent"
+                               app:layout_constraintEnd_toStartOf="@+id/tvFemale"
+                               app:layout_constraintHorizontal_bias="0.0"
+                               app:layout_constraintHorizontal_chainStyle="packed"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toTopOf="parent" />
+
+                           <TextView
+                               android:id="@+id/tvFemale"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_marginEnd="8dp"
+                               android:fontFamily="@font/inter_regular"
+                               android:text="Female"
+                               android:textColor="@color/purple"
+                               android:textSize="12dp"
+                               android:lines="1"
+                               android:maxLines="1"
+                               app:layout_constraintBottom_toBottomOf="@+id/ivFemale"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toEndOf="@+id/ivFemale"
+                               app:layout_constraintTop_toTopOf="@+id/ivFemale" />
+
+                       </androidx.constraintlayout.widget.ConstraintLayout>
+
+                       <androidx.constraintlayout.widget.ConstraintLayout
+                           android:id="@+id/btnOther"
+                           android:layout_width="0dp"
+                           android:layout_height="85dp"
+                           android:background="@drawable/gender_white_bg"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintHorizontal_bias="0.5"
+                           app:layout_constraintStart_toEndOf="@+id/btnFemale"
+                           app:layout_constraintTop_toTopOf="@+id/btnFemale">
+
+
+                           <TextView
+                               android:id="@+id/tvOther"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:fontFamily="@font/inter_medium"
+                               android:text="Other"
+                               android:textColor="@color/purple"
+                               android:textSize="16dp"
+                               app:layout_constraintBottom_toBottomOf="parent"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toTopOf="parent" />
+
+                       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/dateOfBirth"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/clGender">
+
+                       <TextView
+                           android:id="@+id/tvDOB"
+                           android:layout_width="match_parent"
+                           android:layout_height="53dp"
+                           android:hint="   Date of Birth"
+                           android:gravity="center_vertical"
+                           android:paddingLeft="40dp"
+                           android:drawableRight="@drawable/ic_dob"
+                           android:paddingRight="20dp"
+                           android:textColor="@color/black"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <EditText
+                       android:id="@+id/edCnic"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       android:hint="   CNIC"
+                       android:inputType="number"
+                       android:maxLength="14"
+                       android:paddingLeft="40dp"
+                       android:paddingRight="10dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/clLanguage"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/edCnic">
+
+                       <Spinner
+                           android:id="@+id/languagesSpinner"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:paddingLeft="40dp"
+                           android:paddingRight="10dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/clCountries"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/clLanguage">
+
+                       <Spinner
+                           android:id="@+id/countriesSpinner"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:paddingLeft="40dp"
+                           android:paddingRight="10dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/clStates"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/clCountries">
+
+                       <Spinner
+                           android:id="@+id/statesSpinner"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:paddingLeft="40dp"
+                           android:paddingRight="10dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/clCities"
+                       android:layout_width="match_parent"
+                       android:layout_height="55dp"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="24dp"
+                       android:background="@drawable/white_gradient"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/clStates">
+
+                       <Spinner
+                           android:id="@+id/citiesSpinner"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:paddingLeft="40dp"
+                           android:paddingRight="10dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <androidx.appcompat.widget.AppCompatButton
+                       android:id="@+id/btnUpdateProfile"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="24dp"
+                       android:layout_marginTop="32dp"
+                       android:layout_marginEnd="24dp"
+                       android:layout_marginBottom="8dp"
+                       android:background="@drawable/btn_purple_bg"
+                       android:text="@string/update_profile"
+                       android:textColor="@color/white"
+                       android:textSize="16dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/clCities" />
+
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+       </ScrollView>
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

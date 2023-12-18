@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="facility"
+            type="com.ezshifa.aihealthcare.viewmodels.FacilitiesViewModel" />
+
+        <variable
+            name="homeDoctor"
+            type="com.ezshifa.aihealthcare.viewmodels.HomeDoctorViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.QuickSearchFragment">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="@{homeDoctor.showTopDoctors ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/viewAllTopDoctorAll"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/top_doctors_label"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/viewAllTopDoctorAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/view_all"
+                android:textColor="@color/blue_color"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="@{homeDoctor.hasTopDoctors? View.VISIBLE:View.GONE}" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="@{homeDoctor.hasTopDoctors &amp;&amp; homeDoctor.showTopDoctors ? View.VISIBLE:View.GONE}"
+            android:weightSum="10">
+
+            <ImageView
+                android:id="@+id/previousTopDocPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{homeDoctor::loadTopDocPreviousPage}"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_previous_arrow"
+                android:visibility="gone"
+                app:tint="@color/blue_color" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topDoctorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/loadinTopDoc"
+                android:layout_toEndOf="@+id/previousTopDocPage"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/loadinTopDoc"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/green_icon"
+                android:visibility="@{homeDoctor.isLoadingTopDoctors?View.VISIBLE:View.GONE}" />
+
+            <ImageView
+                android:id="@+id/nextTopDocPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{homeDoctor::loadTopDocNextPage}"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_next_arrow"
+                android:visibility="gone"
+                app:tint="@color/blue_color" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/topDocMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!-- android:visibility="@{homeDoctor.hasTopDoctors || homeDoctor.hasTopDocApiResponse || homeDoctor.showTopDoctors? View.GONE : View.VISIBLE, default=gone}">-->
+
+            <TextView
+                android:id="@+id/topDocErrorMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:text="@{homeDoctor.topDoctorErrorMsg}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/topDocryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/signin_btn"
+                android:gravity="center"
+                android:onClick="@{homeDoctor::reloadTopDoc}"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/try_again"
+                android:textColor="@android:color/white"
+                android:visibility="@{homeDoctor.hasTopDoctors ? View.GONE : View.VISIBLE, default=gone}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/viewAllRecDoctorAll"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/choose_doctor"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/refreshDoctorsList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_toStartOf="@id/linearLayout" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_3sdp"
+                android:background="@drawable/edit_border_line"
+                android:padding="@dimen/_3sdp">
+                <!--                <androidx.appcompat.widget.AppCompatSpinner-->
+                <!--                    android:id="@+id/spDocFilter"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:entries="@array/doc_filter"-->
+                <!--                    android:fontFamily="@font/montserrat_regular" />-->
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spDocFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular" />
+
+                <CheckBox
+                    android:id="@+id/chk_online_doc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
+                    android:text="Show Online only"
+                    android:textColor="@color/black"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/viewAllRecDoctorAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/view_all"
+                android:visibility="gone"
+                android:textColor="@color/purple_color"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+            <!--android:visibility="@{homeDoctor.hasRecomendedDoctors? View.VISIBLE:View.GONE}"-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/thereNoDataTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="center"
+                android:padding="@dimen/_20sdp"
+                android:text="@string/there_is_no_data_available"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="gone"/>
+            <LinearLayout
+                android:id="@+id/layout_recomended_doc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/previousRecomendedDocPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{homeDoctor::loadRecomendedDocPreviousPage}"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_previous_arrow"
+                    android:visibility="gone"
+                    app:tint="@color/purple_color" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommendedDoctorList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toStartOf="@+id/loadinRecommendedDoc"
+                    android:layout_toEndOf="@+id/previousRecomendedDocPage"
+                    android:layout_weight="10"
+                    android:orientation="vertical" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/loadMoreRecommendedDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/signin_btn"
+                    android:indeterminate="true"
+                    android:text="@string/load_more"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="@{homeDoctor.isAPIHASDATA?View.VISIBLE:View.GONE}" />
+
+                <ProgressBar
+                    android:id="@+id/loadinRecommendedDoc"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/green_icon"
+                    android:visibility="@{homeDoctor.isLoadingRecommendedDoctors?View.VISIBLE:View.GONE}" />
+
+                <ImageView
+                    android:id="@+id/nextRecomendedDocPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{homeDoctor::loadRecomendedDocNextPage}"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_next_arrow"
+                    android:visibility="gone"
+                    app:tint="@color/purple_color" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/recomendedDocMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="@{homeDoctor.hasRecomendedDoctors || !homeDoctor.hasRecomendedApiResponse? View.GONE : View.VISIBLE, default=gone}">
+
+            <TextView
+                android:id="@+id/recomendedDocErrorMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:text="@{homeDoctor.recomendedDoctorErrorMsg}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/recomendedDocryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="35sp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/signin_btn"
+                android:gravity="center"
+                android:onClick="@{homeDoctor::reloadRecomendedDoc}"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="11sp"
+                android:text="@string/try_again"
+                android:textColor="@android:color/white"
+                android:visibility="@{homeDoctor.hasRecomendedDoctors ? View.GONE : View.VISIBLE, default=gone}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/container_facility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@+id/viewAllHealthcareCenter"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/healthcare_centers_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/viewAllHealthcareCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="@string/view_all"
+                    android:textColor="@color/dark_blue_color"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:visibility="@{facility.hasFacility? View.VISIBLE:View.GONE}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/healthCareCenterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="@{facility.hasFacility ? View.VISIBLE : View.GONE}"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/previousFaciltyPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.7"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{facility::loadPreviousPage}"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_previous_arrow"
+                    android:visibility="gone"
+                    app:tint="@color/dark_blue_color" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/healthcareCenterList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@+id/loadinFacilities"
+                    android:layout_toEndOf="@+id/previousFaciltyPage"
+                    android:layout_weight="8.6"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <ProgressBar
+                    android:id="@+id/loadinFacilities"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="true"
+                    android:visibility="@{facility.isLoading?View.VISIBLE:View.GONE}" />
+
+                <ImageView
+                    android:id="@+id/nextFaciltyPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.7"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{facility::loadNextPage}"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_next_arrow"
+                    android:visibility="gone"
+                    app:tint="@color/dark_blue_color" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/diseaseMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!--   android:visibility="@{facility.hasFacility || !facility.hasApiResponse ? View.GONE : View.VISIBLE, default=gone}">-->
+
+            <TextView
+                android:id="@+id/diseaseErrorMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="center"
+                android:text="@{facility.facilityErrorMsg}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/diseaseTryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/signin_btn"
+                android:gravity="center"
+                android:onClick="@{facility::reloadFacilities}"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/try_again"
+                android:textColor="@android:color/white"
+                android:visibility="@{facility.hasFacility ? View.GONE : View.VISIBLE, default=gone}" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

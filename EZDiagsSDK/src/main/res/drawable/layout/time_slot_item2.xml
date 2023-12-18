@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="@dimen/_2sdp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@drawable/search_view_layout"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="1dp">
+
+        <TextView
+            android:id="@+id/timeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/inter_regular"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="03:00"
+            android:textSize="12sp"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PM"
+        android:id="@+id/timeFormat"
+        android:lines="1"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
