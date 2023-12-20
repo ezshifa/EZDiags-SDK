@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         btnScanning = findViewById(R.id.btnScanning)
 
         btnScanning.setOnClickListener {
-            EZDiags.startScanning(this@MainActivity, "sdktesting")
+            EZDiags.startScanning(this@MainActivity, "Sohail", "abc1234fgh")
         }
 
     }

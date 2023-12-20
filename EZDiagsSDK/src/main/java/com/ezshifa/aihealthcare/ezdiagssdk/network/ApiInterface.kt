@@ -12,7 +12,8 @@ interface ApiInterface {
     @Multipart
     fun UploadVideo(
         @Part fileName: MultipartBody.Part,
-        @Query("userid") username: String
+        @Query("userid") username: String,
+        @Query("userkey") userKey: String
 
     ): Call<UploadVideoResponse>
 
@@ -22,7 +23,8 @@ interface ApiInterface {
     fun getVitalsResults(
         @Field("fileName") fileName: String,
         @Field("vid") vid: Int,
-        @Field("userid") username: String
+        @Field("userid") username: String,
+        @Field("userkey") userKey: String
     ): Call<VitalApiResponse>
 
 

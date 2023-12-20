@@ -58,6 +58,7 @@ class VideoScanningActivity : AppCompatActivity() {
 
     companion object{
         lateinit var userName : String
+        lateinit var userKey : String
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +75,7 @@ class VideoScanningActivity : AppCompatActivity() {
 
         val intent = intent
         userName = intent.getStringExtra("username").toString()
+        userKey = intent.getStringExtra("userKey").toString()
 
         if (checkPermissions()) {
             startCamera()
@@ -347,7 +349,7 @@ class VideoScanningActivity : AppCompatActivity() {
         try {
 
             val apiCall : Call<UploadVideoResponse> = ApiUtils.getAPIService(this@VideoScanningActivity)
-                .UploadVideo(file, userName)
+                .UploadVideo(file, userName, userKey)
 
             apiCall.enqueue(object : Callback<UploadVideoResponse> {
                 override fun onFailure(call: Call<UploadVideoResponse>, t: Throwable) {
@@ -371,14 +373,18 @@ class VideoScanningActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         }else{
-                            Toast.makeText(this@VideoScanningActivity, getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@VideoScanningActivity,
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     } else {
                         mPDialog!!.dismiss()
                         Toast.makeText(
                             this@VideoScanningActivity,
-                            response.body()!!.message,
-                            Toast.LENGTH_SHORT
+                            response.message().toString(),
+                            Toast.LENGTH_LONG
                         ).show()
                     }
 

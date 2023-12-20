@@ -40,5 +40,9 @@
     <string name="permissions_required">Permissions Required</string>
     <string name="please_allow_all_the_permissions_to_continue">Please allow all the permissions to continue..</string>
     <string name="range_chart">Range Chart</string>
+    <string name="valid_username_required">Valid username required</string>
+    <string name="alert">Alert</string>
+    <string name="please_wait_system_is_processing">Please wait system is processing</string>
+    <string name="ok">OK</string>
 
 </resources>

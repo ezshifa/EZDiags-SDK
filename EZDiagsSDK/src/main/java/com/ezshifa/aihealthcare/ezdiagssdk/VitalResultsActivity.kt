@@ -2,6 +2,7 @@ package com.ezshifa.aihealthcare.ezdiagssdk
 
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -15,6 +16,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ezshifa.aihealthcare.ezdiagssdk.databinding.ActivityVitalResultsBinding
 import com.ezshifa.aihealthcare.ezdiagssdk.network.ApiUtils
@@ -28,6 +30,7 @@ import java.util.ArrayList
 class VitalResultsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVitalResultsBinding
+    private var isSystemProcessing = true
     private lateinit var oxygen : String
     private lateinit var heartRate : String
     private lateinit var bloodPressure : String
@@ -103,7 +106,7 @@ class VitalResultsActivity : AppCompatActivity() {
     fun callApi(fileName : String, videoId : String){
 
         ApiUtils.getAPIService(this@VitalResultsActivity)
-            .getVitalsResults(fileName, videoId.toInt(), VideoScanningActivity.userName.toString())
+            .getVitalsResults(fileName, videoId.toInt(), VideoScanningActivity.userName, VideoScanningActivity.userKey)
             .enqueue(object : Callback<VitalApiResponse> {
                 override fun onFailure(call: Call<VitalApiResponse>, t: Throwable) {
                     toast(getString(R.string.default_error_message)+" "+t.message.toString())
@@ -131,11 +134,15 @@ class VitalResultsActivity : AppCompatActivity() {
                                     bpd = apiResponse.vitals!!.bpd!!
 
                                     // show results on screen
+                                    isSystemProcessing = false
                                     binding.clWaitingForResults.visibility = View.GONE
                                     binding.clVitalsResult.visibility = View.VISIBLE
                                     getAndSetValues()
 
-                                }else{
+                                } else if (response.body()!!.statusCode == 404){
+                                    Toast.makeText(this@VitalResultsActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
+                                    finish()
+                                } else{
                                     Toast.makeText(this@VitalResultsActivity, getString(R.string.vital_fetched_unsuccessful_please_try_again), Toast.LENGTH_LONG).show()
                                     finish()
                                 }
@@ -315,6 +322,28 @@ class VitalResultsActivity : AppCompatActivity() {
         val btnCancel : ImageView = dialog.findViewById(R.id.btnCancel)
         btnCancel.setOnClickListener { dialog.dismiss() }
 
+    }
+
+    override fun onBackPressed() {
+        if (isSystemProcessing){
+            showAlertDialog()
+        }else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun showAlertDialog(){
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(getString(R.string.alert))
+        alertDialogBuilder.setIcon(R.drawable.alert_icon)
+        alertDialogBuilder.setMessage(getString(R.string.please_wait_system_is_processing))
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.ok)) { dialog: DialogInterface, which: Int ->
+            dialog.dismiss()
+        }
+
+        val alertDialog: AlertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
 }
