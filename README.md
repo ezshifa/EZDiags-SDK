@@ -19,5 +19,5 @@ dependencyResolutionManagement {
 
 Sample Usage
 ```gradle
-  EZDiags.startScanning(this@MainActivity, "username here")
+  EZDiags.startScanning(this@MainActivity, "username here", "userkey here")
   ```
